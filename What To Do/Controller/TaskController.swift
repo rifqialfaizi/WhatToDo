@@ -23,6 +23,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Data for the table
     var items:[Todo]?
+    var items2 = [Todo]()
     
     // Data from TaskCell -> TAPI ERROR WKWKWK
     static let taskCell = TaskCell()
@@ -95,14 +96,12 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         let lessPriority = UIAlertAction(title: "Normal Priority", style: .default) { (action) in
-            //submitButton
             
             // Change Color ( failed )
-            // TaskController.taskCell.bgTask.backgroundColor = UIColor.blue
+            // TaskController.taskCell.bgTask!.backgroundColor = UIColor.blue
             
             // Change Priority
             let normalPrior = "NORMAL PRIORITY"
-            let background = true
             
             // Get the textfield for the alert
             let textfield = alert.textFields![0]
@@ -111,8 +110,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             let newTask = Todo(context: self.context)
             newTask.task = textfield.text
             newTask.priority = normalPrior
-            newTask.background = background
-            
+             
             
             // Save the data
             self.saveData()
@@ -175,12 +173,16 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Get Task from array and set the label
         let task = self.items![indexPath.row]
         let prior = self.items![indexPath.row]
-        let bg = self.items![indexPath.row]
+        
+        let item = items![indexPath.row]
+        
         
         
         // Configure with label in storyboard
         cell.taskLabel.text = task.task
         cell.priorityLabel.text = prior.priority
+        
+        cell.accessoryType = item.done ? .checkmark : .none
 
         
         
@@ -191,6 +193,9 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: -DidSelect
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // CheckMark
+        items![indexPath.row].done = !items![indexPath.row].done
         
         // Selected task
         let task = self.items![indexPath.row]
@@ -278,6 +283,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     
     }
+    
     
 }
 

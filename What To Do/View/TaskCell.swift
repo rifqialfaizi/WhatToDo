@@ -42,8 +42,7 @@ class TaskCell: UITableViewCell {
     
     @IBAction func checkBoxAction(_ sender: UIButton) {
      
-        
-   
+
         if (checkBox == false) {
             sender.setBackgroundImage((UIImage(named: "circle")), for: UIControl.State.normal)
             checkBox = true
@@ -52,8 +51,6 @@ class TaskCell: UITableViewCell {
             checkBox = false
         }
         
-        task.self.saveData()
-     //   task.self.fetchTask()
  
     }
     
