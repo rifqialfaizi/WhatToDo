@@ -2,7 +2,7 @@
 //  Todo+CoreDataProperties.swift
 //  What To Do
 //
-//  Created by Rifqi Alfaizi on 28/02/21.
+//  Created by Rifqi Alfaizi on 01/03/21.
 //
 //
 
@@ -16,9 +16,10 @@ extension Todo {
         return NSFetchRequest<Todo>(entityName: "Todo")
     }
 
+    @NSManaged public var done: Bool
     @NSManaged public var priority: String?
     @NSManaged public var task: String?
-    @NSManaged public var done: Bool
+    @NSManaged public var priorityNumber: Int64
 
 }
 

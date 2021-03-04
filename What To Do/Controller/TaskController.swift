@@ -22,8 +22,8 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // Data for the table
-    var items:[Todo]?
-    var items2 = [Todo]()
+    var todos:[Todo]?
+    var todos2 = [Todo]()
     
     // Data from TaskCell -> TAPI ERROR WKWKWK
     static let taskCell = TaskCell()
@@ -50,14 +50,14 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func fetchTask() {
         do {
-            
-            self.items = try context.fetch(Todo.fetchRequest())
+            self.todos = try context.fetch(Todo.fetchRequest())
             
             DispatchQueue.main.async {
                 self.taskTable.reloadData()
             }
         }
         catch{
+            print("error in fetch")
             
         }
     }
@@ -69,13 +69,14 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Create Alert
         let alert = UIAlertController(title: "Add New Task", message: "", preferredStyle: .alert)
-        alert.addTextField()
+        alert.addTextField() // Untuk menaruh textfield di alert
+    //    alert.addTextField() // textfield di bawahnya
         
         // Configure button
         let submitButton = UIAlertAction(title: "High Priority", style: .default) { (action) in
             
             // Get the textfield for the alert
-            let textfield = alert.textFields![0]
+            let textfield = alert.textFields!.first // untuk akses textfield pertama atau [0]
             
             // Set the String for priority
             let highPrior = "HIGH PRIORITY"
@@ -83,8 +84,21 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             // Create a task object
             let newTask = Todo(context: self.context)
-            newTask.task = textfield.text
+            newTask.task = textfield!.text
             newTask.priority = highPrior
+            
+            let number = self.todos?.count
+            print("number hi prior \(number!)")
+            print("newTask \(newTask)")
+            
+            
+            var priorNum = [newTask.priorityNumber]
+            priorNum.sort()
+            print("priorNum.sort \(priorNum)")
+            
+            
+            newTask.priorityNumber = Int64(number!)
+            
             
             
             // Save the data
@@ -110,6 +124,8 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             let newTask = Todo(context: self.context)
             newTask.task = textfield.text
             newTask.priority = normalPrior
+            
+            newTask.priorityNumber += 2
              
             
             // Save the data
@@ -132,8 +148,6 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Show alert
         self.present(alert, animated: true, completion: nil)
         
-        
-        
     }
     
     // MARK: -Delete
@@ -142,8 +156,25 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Create swipe action
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
             
+            
             // Which task to remove
-            let taskToRemove = self.items![indexPath.row]
+            let taskToRemove = self.todos![indexPath.row]
+            
+            // Remove the task
+            self.context.delete(taskToRemove)
+            
+            // Save the data
+            self.saveData()
+            
+            // Re-fetch the data
+            self.fetchTask()
+        }
+        
+        let action2 = UIContextualAction(style: .normal, title: "Pin") { (action, view, completionHandler) in
+            
+            
+            // Which task to remove
+            let taskToRemove = self.todos![indexPath.row]
             
             // Remove the task
             self.context.delete(taskToRemove)
@@ -156,13 +187,13 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         // Return swipe action
-        return UISwipeActionsConfiguration(actions: [action])
+        return UISwipeActionsConfiguration(actions: [action, action2])
     }
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items?.count ?? 0
+        return self.todos?.count ?? 0
     }
     
     // MARK: -Cell for row
@@ -171,22 +202,26 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
          
         // Get Task from array and set the label
-        let task = self.items![indexPath.row]
-        let prior = self.items![indexPath.row]
+        let todo = self.todos![indexPath.row]
+        let todo2 = self.todos!
+  
         
-        let item = items![indexPath.row]
         
+        let number = self.todos?.count
+        
+        print("jumlah cell \(number!)")
+     //   print("todo \(todo)")
+        print("todo2 \(todo2)")
         
         
         // Configure with label in storyboard
-        cell.taskLabel.text = task.task
-        cell.priorityLabel.text = prior.priority
+        cell.taskLabel.text = todo.task
+        cell.priorityLabel.text = todo.priority
         
-        cell.accessoryType = item.done ? .checkmark : .none
+        
+      //  todo.priorityNumber = 0
 
-        
-        
-        
+        cell.accessoryType = todo.done ? .checkmark : .none
         return cell
     }
     
@@ -195,10 +230,12 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // CheckMark
-        items![indexPath.row].done = !items![indexPath.row].done
+        let apakahTodoSudahSelesai = !todos![indexPath.row].done // todos![0].sudahSelesai
+        
+        todos![indexPath.row].done = apakahTodoSudahSelesai
         
         // Selected task
-        let task = self.items![indexPath.row]
+        let task = self.todos![indexPath.row]
         
         // Create alert
         let alert = UIAlertController(title: "Edit Task", message: "", preferredStyle: .alert)
@@ -286,4 +323,3 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
 }
-
