@@ -46,6 +46,8 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         getDate()
         
         
+        
+        
     }
     
     func fetchTask() {
@@ -90,15 +92,14 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             let number = self.todos?.count
             print("number hi prior \(number!)")
             print("newTask \(newTask)")
+              
+            var array = newTask.priorityNumber
+            array = Int64(number!)
             
+            var hiPriorNum = [newTask.priorityNumber]
+            hiPriorNum.append(array)
             
-            var priorNum = [newTask.priorityNumber]
-            priorNum.sort()
-            print("priorNum.sort \(priorNum)")
-            
-            
-            newTask.priorityNumber = Int64(number!)
-            
+        //    TaskController.taskCell.bgTask.backgroundColor = UIColor.red
             
             
             // Save the data
@@ -205,12 +206,15 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         let todo = self.todos![indexPath.row]
         let todo2 = self.todos!
   
+        var priorNum = [todo.priorityNumber]
+        priorNum.sort()
         
         
         let number = self.todos?.count
         
         print("jumlah cell \(number!)")
-     //   print("todo \(todo)")
+        print("Priority Number \(priorNum)")
+        print("todo\(todo)")
         print("todo2 \(todo2)")
         
         
