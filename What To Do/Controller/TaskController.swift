@@ -212,6 +212,10 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let number = self.todos?.count
         
+        
+        
+  //      backgroundCell()
+        
         print("jumlah cell \(number!)")
         print("Priority Number \(priorNum)")
         print("todo\(todo)")
@@ -224,6 +228,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
       //  todo.priorityNumber = 0
+        
 
         cell.accessoryType = todo.done ? .checkmark : .none
         return cell
