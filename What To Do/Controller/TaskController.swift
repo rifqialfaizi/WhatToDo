@@ -92,12 +92,14 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             let number = self.todos?.count
             print("number hi prior \(number!)")
             print("newTask \(newTask)")
-              
-            var array = newTask.priorityNumber
-            array = Int64(number!)
             
-            var hiPriorNum = [newTask.priorityNumber]
-            hiPriorNum.append(array)
+            newTask.priorityNumber = Int64(number!)
+            
+     //       var array = newTask.priorityNumber
+      //      array = Int64(number!)
+            
+        //    var hiPriorNum = [newTask.priorityNumber]
+       //     hiPriorNum.append(array)
             
         //    TaskController.taskCell.bgTask.backgroundColor = UIColor.red
             
