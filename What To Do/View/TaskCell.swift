@@ -24,7 +24,7 @@ class TaskCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.bgTask.layer.cornerRadius = 20
+        self.bgTask.layer.cornerRadius = 10
         
         // Initialization code
     }
@@ -42,7 +42,7 @@ class TaskCell: UITableViewCell {
     
     @IBAction func checkBoxAction(_ sender: UIButton) {
      
-
+        
         if (checkBox == false) {
             sender.setBackgroundImage((UIImage(named: "circle")), for: UIControl.State.normal)
             checkBox = true
