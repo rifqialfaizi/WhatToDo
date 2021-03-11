@@ -112,8 +112,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Re-fetch the data
             self.fetchTask()
         }
-        
-        
+
         let lessPriority = UIAlertAction(title: "Normal Priority", style: .default) { (action) in
             
             // Change Priority
@@ -178,27 +177,21 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let action2 = UIContextualAction(style: .normal, title: "Change Priority") { (action, view, completionHandler) in
             
-            
-            // Which task to remove
+            // Which task to change
             let taskChangePrior = self.todos![indexPath.row]
             
-            // Change Priority
-            let newTask = Todo(context: self.context)
-            newTask.done = false
-            
             let number = self.todos?.count
-            taskChangePrior.priorityNumber = Int64(number!)
+            let hiPriority = "HIGH PRIORITY"
+            let norPriority = "NORMAL PRIORITY"
             
-            if taskChangePrior.priorityNumber < 100 {
+            if taskChangePrior.priorityNumber > 100 {
                 taskChangePrior.priorityNumber = Int64(number!)
-            } else {
+                taskChangePrior.priority = hiPriority
+            } else if taskChangePrior.priorityNumber < 100 {
+                taskChangePrior.priority = norPriority
                 let two = Int64(100)
                 taskChangePrior.priorityNumber = Int64(number!) + two
             }
-            
-            
-            // Remove the task
-            self.context.delete(taskChangePrior)
             
             // Save the data
             self.saveData()
@@ -225,10 +218,20 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         let todo = self.todos![indexPath.row]
         let todo2 = self.todos!
         
-        if todo.priority == "HIGH PRIORITY" {
+        if todo.priorityNumber < 100 {
             cell.bgTask.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         } else {
             cell.bgTask.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        }
+        
+        var checkBox = TaskController.taskCell.checkBox
+        
+        if todo.done == false {
+            cell.checkImage.image = UIImage(named: "circle")
+            todo.done = true
+        } else {
+            cell.checkImage.image = UIImage(named: "rec")
+            todo.done = false
         }
         
         print("todo2 \(todo2)")
@@ -238,7 +241,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.taskLabel.text = todo.task
         cell.priorityLabel.text = todo.priority
         
-        cell.accessoryType = todo.done ? .checkmark : .none
+ //       cell.accessoryType = todo.done ? .checkmark : .none
         return cell
     }
     
@@ -249,7 +252,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         // CheckMark
         let apakahTodoSudahSelesai = !todos![indexPath.row].done // todos![0].sudahSelesai
         
-        todos![indexPath.row].done = apakahTodoSudahSelesai
+ //       todos![indexPath.row].done = apakahTodoSudahSelesai
         
         // Selected task
         let task = self.todos![indexPath.row]

@@ -91,6 +91,13 @@
                                                         <constraint firstItem="fxn-Nx-TfA" firstAttribute="leading" secondItem="pPa-uP-pf0" secondAttribute="leading" constant="16" id="zzd-Fp-bSW"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rec" translatesAutoresizingMaskIntoConstraints="NO" id="Jyj-Iy-LGQ">
+                                                    <rect key="frame" x="334" y="43" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="jfO-Ei-liN"/>
+                                                        <constraint firstAttribute="width" constant="30" id="v3V-Ra-Bhr"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJS-XJ-BmV">
                                                     <rect key="frame" x="334" y="43" width="30" height="30"/>
                                                     <constraints>
@@ -108,15 +115,18 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="AJS-XJ-BmV" secondAttribute="trailing" constant="30" id="5y7-AS-YwU"/>
+                                                <constraint firstItem="AJS-XJ-BmV" firstAttribute="centerY" secondItem="EBo-Ao-ziV" secondAttribute="centerY" id="8LN-8R-bth"/>
+                                                <constraint firstItem="Jyj-Iy-LGQ" firstAttribute="centerY" secondItem="EBo-Ao-ziV" secondAttribute="centerY" id="BQo-3n-Rqx"/>
                                                 <constraint firstItem="pPa-uP-pf0" firstAttribute="centerX" secondItem="EBo-Ao-ziV" secondAttribute="centerX" id="N1r-bk-THH"/>
-                                                <constraint firstItem="AJS-XJ-BmV" firstAttribute="centerY" secondItem="EBo-Ao-ziV" secondAttribute="centerY" id="Yp6-aZ-sgM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Jyj-Iy-LGQ" secondAttribute="trailing" constant="30" id="Ydo-Iv-aZj"/>
                                                 <constraint firstItem="pPa-uP-pf0" firstAttribute="centerY" secondItem="EBo-Ao-ziV" secondAttribute="centerY" id="aTd-0J-hLf"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="AJS-XJ-BmV" secondAttribute="trailing" constant="30" id="veR-vX-GGe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bgTask" destination="pPa-uP-pf0" id="fq5-8p-8L8"/>
                                             <outlet property="checkBoxOutlet" destination="AJS-XJ-BmV" id="XCr-zH-xp8"/>
+                                            <outlet property="checkImage" destination="Jyj-Iy-LGQ" id="bpF-i9-BmD"/>
                                             <outlet property="priorityLabel" destination="q7J-Bn-guM" id="2UN-bH-Nsw"/>
                                             <outlet property="taskLabel" destination="fxn-Nx-TfA" id="7qG-e3-jvH"/>
                                         </connections>

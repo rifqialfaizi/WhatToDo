@@ -15,7 +15,9 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var priorityLabel: UILabel!
     
+    @IBOutlet weak var checkImage: UIImageView!
     
+    var todos:[Todo]?
     
     let task = TaskController()
     
@@ -41,17 +43,15 @@ class TaskCell: UITableViewCell {
     }
     
     @IBAction func checkBoxAction(_ sender: UIButton) {
-     
+     //   let check = self.todos![indexPath.row]
         
-        if (checkBox == false) {
-            sender.setBackgroundImage((UIImage(named: "circle")), for: UIControl.State.normal)
+        if ( checkBox == false) {
+         //   sender.setBackgroundImage((UIImage(named: "circle")), for: UIControl.State.normal)
             checkBox = true
         } else {
-            sender.setBackgroundImage((UIImage(named: "rec")), for: UIControl.State.normal)
+         //   sender.setBackgroundImage((UIImage(named: "rec")), for: UIControl.State.normal)
             checkBox = false
         }
-        
- 
     }
     
     
