@@ -17,6 +17,8 @@ class TaskCell: UITableViewCell {
     
     @IBOutlet weak var checkImage: UIImageView!
     
+    static let shared = TaskCell()
+    
     var todos:[Todo]?
     
     let task = TaskController()
@@ -29,8 +31,8 @@ class TaskCell: UITableViewCell {
         self.bgTask.layer.cornerRadius = 10
         
         // Initialization code
+        
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -53,11 +55,6 @@ class TaskCell: UITableViewCell {
             checkBox = false
         }
     }
-    
-    
-    
-    
-    
-    
 
 }
+
