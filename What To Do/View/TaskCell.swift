@@ -9,6 +9,7 @@ import UIKit
 
 class TaskCell: UITableViewCell {
 
+    
     @IBOutlet weak var checkBoxOutlet: UIButton!
     @IBOutlet weak var bgTask: UIView!
     
@@ -17,13 +18,13 @@ class TaskCell: UITableViewCell {
     
     @IBOutlet weak var checkImage: UIImageView!
     
-    static let shared = TaskCell()
-    
     var todos:[Todo]?
     
     let task = TaskController()
     
     var checkBox = false
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,27 +34,34 @@ class TaskCell: UITableViewCell {
         // Initialization code
         
     }
+   
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func completed() {
-        
-    //    items![indexPath.row].completed = !items![indexPath.row].completed
-    }
+    
     
     @IBAction func checkBoxAction(_ sender: UIButton) {
-     //   let check = self.todos![indexPath.row]
+
+    //    let newDone = Todo(context: self.context)
         
-        if ( checkBox == false) {
-         //   sender.setBackgroundImage((UIImage(named: "circle")), for: UIControl.State.normal)
+        if  checkBox == false {
+    //        checkImage.image = UIImage(named: "rec")
+            
+            
             checkBox = true
+            
         } else {
-         //   sender.setBackgroundImage((UIImage(named: "rec")), for: UIControl.State.normal)
+      //      checkImage.image = UIImage(named: "circle")
+            
             checkBox = false
+            
         }
+        print("CheckBox Cell \(checkBox)")
+
+        
     }
 
 }

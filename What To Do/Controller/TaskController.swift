@@ -23,13 +23,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Data for the table
     var todos:[Todo]?
     
-    // Data from TaskCell -> Masih error
-    static var taskCell = TaskCell()
-    
-    // Background Set
-    var checkBox = taskCell.checkBox
-    
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -206,10 +200,23 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         return self.todos?.count ?? 0
     }
     
+    
     // MARK: -Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
+
+        // PERKARA ERROR JANGAN DI PAKE
+        // Set the done
+   //    let newDone = Todo(context: self.context)
+        
+        // Data from TaskCell -> Masih error
+        let taskCell = TaskCell()
+        
+        // Background Set
+        let checkBox = taskCell.checkBox
+        let checkIcon = cell.checkImage
+        
         
         // Get Task from array and set the label
         let todo = self.todos![indexPath.row]
@@ -217,46 +224,43 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let viewCell = cell.bgTask
         
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        viewCell!.addSubview(blurEffectView)
-        
-        viewCell?.layer.shadowColor = #colorLiteral(red: 0.8747010771, green: 0.9914394021, blue: 1, alpha: 1)
-        viewCell?.layer.shadowOpacity = 100
-        viewCell?.layer.shadowRadius = 2
-        viewCell?.layer.shadowOffset = .init(width: 3, height: 3)
-        
         if todo.priorityNumber < 100 {
             viewCell!.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         } else {
             viewCell!.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         }
         
-        //        var checkBox = TaskController.taskCell.checkBox
         
-        if checkBox == false {
-            cell.checkImage.image = UIImage(named: "circle")
+  /*      if checkBox == false {
             todo.done = true
+            checkIcon!.image = UIImage(named: "circle")
         } else {
-            cell.checkImage.image = UIImage(named: "rec")
             todo.done = false
-        }
-        
-        print("todo2 \(todo2)")
-        
+            checkIcon!.image = UIImage(named: "rec")
+            
+        } */
+ 
+ //       print("todo2 \(todo2)")
+  //      print("CheckBox Row \(todo.done)  ")
+        print("todo indexpath row \(todo)")
+  //      print("\(todo2.count)")
+
         
         // Configure with label in storyboard
         cell.taskLabel.text = todo.task
         cell.priorityLabel.text = todo.priority
         
-//       cell.accessoryType = todo.done ? .checkmark : .none
+        
+//       cell.checkImage = todo.done ? UIImage(named: "circle") : UIImage(named: "circle")
+        
+       cell.accessoryType = todo.done ? .checkmark : .none
         return cell
     }
     
     // MARK: -DidSelect
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         
         // CheckMark
         let apakahTodoSudahSelesai = !todos![indexPath.row].done // todos![0].sudahSelesai
@@ -266,7 +270,8 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Selected task
         let task = self.todos![indexPath.row]
 
-   //     self.context.delete(task)
+        // Untuk delete yang sudah checkMark
+//     self.context.delete(task)
         
         
         // Create alert
@@ -331,15 +336,5 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         dayLabel.text = dayString
         
         monthLabel.text = monthString
-    }
-}
-
-extension UIImageView {
-    func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(blurEffectView)
     }
 }
