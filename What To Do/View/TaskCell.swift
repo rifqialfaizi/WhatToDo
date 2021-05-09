@@ -9,8 +9,6 @@ import UIKit
 
 class TaskCell: UITableViewCell {
 
-    
-    @IBOutlet weak var checkBoxOutlet: UIButton!
     @IBOutlet weak var bgTask: UIView!
     
     @IBOutlet weak var taskLabel: UILabel!
@@ -24,7 +22,7 @@ class TaskCell: UITableViewCell {
     
     var checkBox = false
     
-    
+    var taskController: TaskController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,29 +38,7 @@ class TaskCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    
-    
-    @IBAction func checkBoxAction(_ sender: UIButton) {
 
-    //    let newDone = Todo(context: self.context)
-        
-        if  checkBox == false {
-    //        checkImage.image = UIImage(named: "rec")
-            
-            
-            checkBox = true
-            
-        } else {
-      //      checkImage.image = UIImage(named: "circle")
-            
-            checkBox = false
-            
-        }
-        print("CheckBox Cell \(checkBox)")
-
-        
-    }
 
 }
 
