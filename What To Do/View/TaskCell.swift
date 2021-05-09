@@ -15,15 +15,7 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var priorityLabel: UILabel!
     
     @IBOutlet weak var checkImage: UIImageView!
-    
-    var todos:[Todo]?
-    
-    let task = TaskController()
-    
-    var checkBox = false
-    
-    var taskController: TaskController?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
