@@ -1,6 +1,6 @@
 What to Do
 ===================
-<img src="./Preview/Checked.png" alt="alt text" width="160px" height="160px">
+<img src="./Preview/checked.png" alt="alt text" width="160px" height="160px">
 
 [![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
 )](https://developer.apple.com/iphone/index.action)
