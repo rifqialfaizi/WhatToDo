@@ -23,13 +23,7 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Data for the table
     var todos:[Todo]?
     
-    // Data from TaskCell -> Masih error
-    static var taskCell = TaskCell()
-    
-    // Background Set
-    var checkBox = taskCell.checkBox
-    
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -196,9 +190,43 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Re-fetch the data
             self.fetchTask()
         }
+        let action3 = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+            
+            // Which task to change
+            let taskEdit = self.todos![indexPath.row]
+
+            // Create Alert
+            let alert = UIAlertController(title: "Edit Task", message: "", preferredStyle: .alert)
+            alert.addTextField()
+            
+            let textfield = alert.textFields![0]
+            textfield.text = taskEdit.task
+            
+            // Configure button handler
+            let saveButton = UIAlertAction(title: "Save", style: .default) { (action) in
+                
+                // Get the textfield for the alert
+                let textfield = alert.textFields![0]
+                
+                // Edit name of task
+                taskEdit.task = textfield.text
+                
+                // Save the data
+                self.saveData()
+                
+                // Re-fetch the data
+                self.fetchTask()
+            }
+            // Add Button
+            alert.addAction(saveButton)
+            // Show Alert
+            self.present(alert, animated: true, completion: nil)
+            
+
+        }
         
         // Return swipe action
-        return UISwipeActionsConfiguration(actions: [action, action2])
+        return UISwipeActionsConfiguration(actions: [action, action2, action3])
        
     }
 
@@ -206,96 +234,90 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
         return self.todos?.count ?? 0
     }
     
+    
     // MARK: -Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
+
+        // PERKARA ERROR JANGAN DI PAKE
+        // let newDone = Todo(context: self.context)
         
         // Get Task from array and set the label
         let todo = self.todos![indexPath.row]
-        let todo2 = self.todos!
         
+        // Set Cell color
         let viewCell = cell.bgTask
-        
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        viewCell!.addSubview(blurEffectView)
-        
-        viewCell?.layer.shadowColor = #colorLiteral(red: 0.8747010771, green: 0.9914394021, blue: 1, alpha: 1)
-        viewCell?.layer.shadowOpacity = 100
-        viewCell?.layer.shadowRadius = 2
-        viewCell?.layer.shadowOffset = .init(width: 3, height: 3)
         
         if todo.priorityNumber < 100 {
             viewCell!.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        } else if todo.priorityNumber > 200 {
+            viewCell!.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         } else {
             viewCell!.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         }
         
-        //        var checkBox = TaskController.taskCell.checkBox
+        // Set circle image
+       
+        let checkIcon = cell.checkImage
         
-        if checkBox == false {
-            cell.checkImage.image = UIImage(named: "circle")
+        if todo.done == true {
             todo.done = true
+            checkIcon!.image = UIImage(named: "circle")
         } else {
-            cell.checkImage.image = UIImage(named: "rec")
             todo.done = false
+            checkIcon!.image = UIImage(named: "rec")
+            
         }
-        
-        print("todo2 \(todo2)")
-        
         
         // Configure with label in storyboard
         cell.taskLabel.text = todo.task
         cell.priorityLabel.text = todo.priority
         
-//       cell.accessoryType = todo.done ? .checkmark : .none
+        // Original check from UIKit for cell
+        //cell.accessoryType = todo.done ? .checkmark : .none
+        
+        print("Todo = self.todos![indexPath.row] \(todo)")
+        
         return cell
     }
     
     // MARK: -DidSelect
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let todo = self.todos![indexPath.row]
+        let recentNumber = self.todos?.count
+        let three = Int64(100)
+        let four = Int64(200)
+        
         
         // CheckMark
         let apakahTodoSudahSelesai = !todos![indexPath.row].done // todos![0].sudahSelesai
         
         todos![indexPath.row].done = apakahTodoSudahSelesai
         
-        // Selected task
-        let task = self.todos![indexPath.row]
-
-   //     self.context.delete(task)
-        
-        
-        // Create alert
-        let alert = UIAlertController(title: "Edit Task", message: "", preferredStyle: .alert)
-        alert.addTextField()
-        
-        let textfield = alert.textFields![0]
-        textfield.text = task.task
-        
-        // Configure button Handler
-        let saveButton = UIAlertAction(title: "Save", style: .default) { (action) in
-            
-            // Get the textfield for the alert
-            let textfield = alert.textFields![0]
-            
-            // Edit name property of person object
-            task.task = textfield.text
-            
-            // Save the data
-            self.saveData()
-            
-            // Re-fetch the data
-            self.fetchTask()
-            
+        // Done Priority
+        if todo.priorityNumber < 200 {
+            todo.priorityNumber = Int64(recentNumber!) + four
+        } else if todo.priority == "NORMAL PRIORITY" {
+            todo.priorityNumber = Int64(recentNumber!) + three
+        } else {
+            todo.priorityNumber = Int64(recentNumber!)
         }
-        // Add Button
-        alert.addAction(saveButton)
-        // Show alert
-        self.present(alert, animated: true, completion: nil)
+        
+        // Save Data
+        self.saveData()
+        
+        // Re-fetch the data
+        self.fetchTask()
+        
+        // Selected task
+ //       let task = self.todos![indexPath.row]
+
+        // Untuk delete yang sudah checkMark
+//     self.context.delete(task)
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -334,12 +356,3 @@ class TaskController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 }
 
-extension UIImageView {
-    func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(blurEffectView)
-    }
-}
