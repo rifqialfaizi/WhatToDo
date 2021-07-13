@@ -8,11 +8,11 @@ What to Do
 )](https://developer.apple.com/swift)
 
 
-An app for order food with SwiftUI.
+An app to remind you what you have to do
 ## 🏃‍♂️ Getting Started
 
 ``` bash
-git clone https://github.com/robihamanto/pesenin.git
+git clone https://github.com/rifqialfaizi/WhatToDo.git
 cd Talents
 open Talents.workspace # or xed .
 
@@ -20,7 +20,7 @@ open Talents.workspace # or xed .
 - Test (⌘ + U)
 ```
 
-## 👨🏻‍💻 Pesenin Design
+## 👨🏻‍💻 What to Do Design
   <p float="left">
     <img src="./Preview/pesenin-menu-list-scene-light.png" width="20%"/>
     <img src="./Preview/pesenin-menu-detail-scene-light.png" width="18%"/> 
@@ -38,14 +38,14 @@ open Talents.workspace # or xed .
   </p>
 
 Feature: 
-- Fetch all Menu
-- Show Menu Detail Item
-- Place To Order
-- Favourite
+- Date 
+- Add, edit and delete list
+- Move priority
+- turn into green color when its done
 
 
 ## 🎉 Why I am building this?
-1. Explore SwiftUI 🔥
+1. Explore Core Data 🔥
 2. Learn new thing
 
 
