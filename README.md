@@ -30,7 +30,7 @@ open WhatToDo.workspace # or xed .
 
 Feature: 
 - Date 
-- Add, edit and delete list
+- Add, edit and delete Task
 - Move priority
 - turn into green color when its done
 
