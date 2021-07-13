@@ -42,4 +42,4 @@ Feature:
 
 
 ## 📱 Preview
-<img src="./Preview/talents.gif" alt="alt text" width="188px" height="408px">
+<img src="./Preview/Preview App.gif" alt="alt text" width="210px" height="408px">
