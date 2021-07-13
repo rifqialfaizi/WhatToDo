@@ -13,8 +13,8 @@ An app to remind you what you have to do
 
 ``` bash
 git clone https://github.com/rifqialfaizi/WhatToDo.git
-cd Talents
-open Talents.workspace # or xed .
+cd WhatToDo
+open WhatToDo.workspace # or xed .
 
 - Run (⌘ + R) or
 - Test (⌘ + U)
@@ -22,19 +22,10 @@ open Talents.workspace # or xed .
 
 ## 👨🏻‍💻 What to Do Design
   <p float="left">
-    <img src="./Preview/pesenin-menu-list-scene-light.png" width="20%"/>
-    <img src="./Preview/pesenin-menu-detail-scene-light.png" width="18%"/> 
-    <img src="./Preview/pesenin-favourite-scene-light.png" width="18%"/> 
-    <img src="./Preview/pesenin-order-scene-light.png" width="18%"/> 
-    <img src="./Preview/pesenin-checkout-scene-light.png" width="18%"/> 
-  </p>
-  
-  <p float="left">
-    <img src="./Preview/pesenin-menu-list-scene-dark.png" width="20%"/>
-    <img src="./Preview/pesenin-menu-detail-scene-dark.png" width="18%"/> 
-    <img src="./Preview/pesenin-favourite-scene-dark.png" width="18%"/> 
-    <img src="./Preview/pesenin-order-scene-dark.png" width="18%"/> 
-    <img src="./Preview/pesenin-checkout-scene-dark.png" width="18%"/> 
+    <img src="./Screenshot/iPhone.png" width="20%"/>
+    <img src="./Screenshot/iPhone Copy 3.png" width="20%"/> 
+    <img src="./Screenshot/iPhone Copy 2.png" width="20%"/> 
+    <img src="./Screenshot/iPhone Copy.png" width="20%"/> 
   </p>
 
 Feature: 
