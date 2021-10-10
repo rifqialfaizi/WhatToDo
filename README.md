@@ -9,7 +9,7 @@ What to Do
 
 
 An app to remind you what you have to do
-## 🏃‍♂️ Getting Started
+## Getting Started
 
 ``` bash
 git clone https://github.com/rifqialfaizi/WhatToDo.git
@@ -20,7 +20,7 @@ open WhatToDo.workspace # or xed .
 - Test (⌘ + U)
 ```
 
-## 👨🏻‍💻 What to Do Design
+## What to Do Design
   <p float="left">
     <img src="./Screenshot/iPhone.png" width="20%"/>
     <img src="./Screenshot/iPhone Copy 3.png" width="20%"/> 
@@ -35,11 +35,11 @@ Feature:
 - turn into green color when its done
 
 
-## 🎉 Why I am building this?
-1. Explore Core Data 🔥
+## Why I am building this?
+1. Explore Core Data 
 2. Learn new thing
 
 
 
-## 📱 Preview
+## Preview
 <img src="./Preview/Preview App.gif" alt="alt text" width="210px" height="408px">
